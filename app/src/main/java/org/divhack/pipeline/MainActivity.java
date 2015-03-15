@@ -69,15 +69,30 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            if (extras.containsKey("clicked")) {
+                if (extras.getBoolean("clicked")) {
+                    totalDaysMissed++;
+                    totalDaysMissed++;
+                    resultText.setText("The total days missed is " + totalDaysMissed);
+                }
+            }
+        }
     }
 
     private void sendNotification(){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        Intent myIntent = new Intent(this, MainActivity.class);
+        myIntent.putExtra("clicked", true);
+        PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, myIntent, Intent.FILL_IN_ACTION);
         builder.setAutoCancel(true);
         builder.setContentTitle(reminder);
         builder.setSmallIcon(R.drawable.abc_ic_menu_selectall_mtrl_alpha);
-
+        builder.setContentIntent(pendingIntent);
         Notification notification = builder.build();
+
         NotificationManager manager = (NotificationManager)this.getSystemService(NOTIFICATION_SERVICE);
         manager.notify(8, notification);
     }
