@@ -4,7 +4,7 @@
     <string name="yes_button">Yes</string>
     <string name="question">Did you show up to class today?</string>
     <string name="input">input</string>
-    <string name="result_text">The result is </string>
+    <string name="result_text">What difference can you make in your life?</string>
     <integer name="result">0</integer>
     <string name="testpass">EVEN</string>
     <string name="testfail">ODD</string>

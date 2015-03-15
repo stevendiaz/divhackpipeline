@@ -28,8 +28,11 @@ public class MainActivity extends ActionBarActivity {
     private EditText missed;
     private Button yesButton;
     private TextView resultText;
+    private TextView moneyText;
+    private TextView lifeText;
     private String reminder = "Daily reminder to check in! \n -Pipeline";
 
+    /*
     public void buttonOnClick(View view){
 
         Button button = (Button) view;
@@ -40,34 +43,22 @@ public class MainActivity extends ActionBarActivity {
 
         Toast.makeText(this, totalDaysMissed, Toast.LENGTH_SHORT).show();
 
-    }
+    } */
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        missed = (EditText)findViewById(R.id.days_missed);
-        yesButton = (Button)findViewById(R.id.yes_button);
+//        missed = totalDaysMissed;
+//        yesButton = (Button)findViewById(R.id.yes_button);
         resultText = (TextView)findViewById(R.id.result_text);
-        yesButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-//                int currentDaysMissed = Integer.parseInt(missed.getText().toString());
-//                if(currentDaysMissed < 0 || currentDaysMissed > 5) {
-//                    int messageResId = R.string.notInRange;
-//                    Toast.makeText(MainActivity.this, messageResId, Toast.LENGTH_SHORT).show();
-//                } else {
-//                    updateDays(currentDaysMissed);
-//                }
-
-                sendNotification();
-                createScheduledNotification(1);
-                updateDays(1);
-
-            }
-        });
+        moneyText = (TextView)findViewById(R.id.money_text);
+        lifeText = (TextView)findViewById(R.id.life_text);
+        sendNotification();
+        createScheduledNotification(1);
+//        updateDays();
 
         Bundle extras = getIntent().getExtras();
 
@@ -75,8 +66,11 @@ public class MainActivity extends ActionBarActivity {
             if (extras.containsKey("clicked")) {
                 if (extras.getBoolean("clicked")) {
                     totalDaysMissed++;
-                    totalDaysMissed++;
-                    resultText.setText("The total days missed is " + totalDaysMissed);
+                    resultText.setText("You've made it to " + totalDaysMissed + " days of class");
+                    int money = (totalDaysMissed * 27);
+                    moneyText.setText("Over your life, you'll make " + money + " more dollars");
+                    double life = (totalDaysMissed * 4.5625);
+                    lifeText.setText("You will on average live " + life + " more days");
                 }
             }
         }
